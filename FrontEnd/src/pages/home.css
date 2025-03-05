@@ -5,16 +5,16 @@
     align-items: center;
     row-gap: 40px;
  }
- .package-outer-con{
+ .home-package-outer-con{
     width: 87%;
     padding:0px 40px;
     border-radius: 15px;
     background-color: aliceblue;
  }
-.package-outer-con>h1{
+.home-package-outer-con>h1{
     padding-left: 10px;
 }
-.package-con
+.home-package-con
 {
     display: flex;
     column-gap: 3%;
@@ -23,16 +23,16 @@
     position: relative;
     padding-bottom: 30px;
 }
-.package-card{
+.home-package-card{
     position: relative;
 }
-.package-card>img{
+.home-package-card>img{
     border-radius: 8px;
 }
 /* ::-webkit-scrollbar{
     display: none;
 } */
-.package-card>p{
+.home-package-card>p{
     position: absolute;
     bottom: 4px;
     margin: 0px;
