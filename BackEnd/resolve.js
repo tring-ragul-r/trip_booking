@@ -1,26 +1,88 @@
 const connection = require("./dbConnect.js");
-const bcrypt = require('bcrypt');
-
+const bcrypt = require("bcrypt");
 
 const root = {
-    signUp: async ({ name, email, password }) => {
-        try {
-          const hashedPassword = await bcrypt.hash(password, 10);
-          const res = await connection.query(
-            "INSERT INTO userdata (name, email, password) VALUES ($1, $2, $3) RETURNING id",
-            [name, email, hashedPassword]
-          );
-          if (res.rowCount > 0) {
-            return "User signed up successfully!";
-          } else {
-            throw new Error("Failed to sign up user");
-          }
-        } catch (err) {
-          console.error("Error in signUp resolver:", err.message);
-          throw new Error(err.message);
-        }
-      },
+  signUp: async ({ name, email, password }) => {
+    try {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const res = await connection.query(
+        "INSERT INTO userdata (name, email, password) VALUES ($1, $2, $3) RETURNING id",
+        [name, email, hashedPassword]
+      );
+      console.log(res.rows);
+
+      if (res.rowCount > 0) {
+        return "User signed up successfully!";
+      } else {
+        throw new Error("Failed to sign up user");
+      }
+    } catch (err) {
+      console.error("Error in signUp resolver:", err.message);
+      throw new Error(err.message);
+    }
+  },
+  signIn: async ({ email, password }) => {
+    try {
+      const result = await connection.query(
+        "select id,name,email,password from userdata where email = $1",
+        [email]
+      );
+      if(result.rows.length===0){
+        throw new Error("user not found")
+      }
+      const data = result.rows[0];
+      const match = await bcrypt.compare(password,data.password);
+      if(!match){
+        throw new Error("Invalid password")
+      }
+      return data;
+    } catch (err) {
+      console.error(err.message);
+      throw new Error(err.message||"Login failed")
       
-  };
-  module.exports = root;
-  
+    }
+  },
+  bestPackage : async()=>{
+    try{
+      const response = await connection.query(
+        "select id,location,image from best_package"
+      )
+      if(response.rows.length==0){
+        throw new Error("Not found")
+      }
+      return response.rows
+    }
+    catch(err){
+
+    }
+  },
+  visaFree : async()=>{
+    try{
+      const response = await connection.query(
+        "select id,location,image from visa_free"
+      )
+      if(response.rows.length==0){
+        throw new Error("Not found")
+      }
+      return response.rows
+    }
+    catch(err){
+
+    }
+  },
+  internationalTrip : async()=>{
+    try{
+      const response = await connection.query(
+        "select id,location,image from international_trip"
+      )
+      if(response.rows.length==0){
+        throw new Error("Not found")
+      }
+      return response.rows
+    }
+    catch(err){
+
+    }
+  },
+};
+module.exports = root;

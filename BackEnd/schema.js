@@ -7,10 +7,19 @@ const schema = buildSchema(
     name:String,
     email:String
     }
+    type package{
+    id:Int,
+    location:String,
+    image:String
+    }
 
     type Query{
-    logIn(email:String!,password:String!):user
+    signIn(email:String!,password:String!):user
+    bestPackage:[package]
+    visaFree:[package]
+    internationalTrip:[package]
     }
+    
 
     type Mutation{
         signUp(name:String!,email:String!,password:String!):String

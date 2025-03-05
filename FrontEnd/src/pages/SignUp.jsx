@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaUser } from "react-icons/fa";
 import { AiOutlineMail } from "react-icons/ai";
 import { MdLock } from "react-icons/md";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "./signup.css";
 import signupImg from "../assets/signup-bg-img.png";
 import logo from "../assets/signup-logo.png";
 const SignUp = () => {
+  const navigator = useNavigate();
   const {
     register,
     handleSubmit,
@@ -22,14 +24,17 @@ const SignUp = () => {
         mutation {
       signUp(name: "${data.name}", email: "${data.email}", password: "${data.password}")
     }
-
     `;
 
     try {
       const response = await axios.post("http://localhost:3000/graphql", {
         query,
       });
-      console(response.data.data.signUp);
+
+      console.log(response.data.data.signUp);
+      
+      navigator("/signin")
+      
     } catch (error) {
       //console.error(error);
     }
@@ -54,7 +59,6 @@ const SignUp = () => {
             <div className="form-body">
               <label>Name</label>
               <div className="input-con">
-                {" "}
                 <input
                   type="text"
                   placeholder="Name"
@@ -69,7 +73,6 @@ const SignUp = () => {
             <div className="form-body">
               <label>Email</label>
               <div className="input-con">
-                {" "}
                 <input
                   type="email"
                   placeholder="Email"
@@ -90,7 +93,6 @@ const SignUp = () => {
             <div className="form-body">
               <label>Password</label>
               <div className="input-con">
-                {" "}
                 <input
                   type="password"
                   placeholder="Password"
