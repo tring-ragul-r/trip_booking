@@ -27,62 +27,76 @@ const root = {
         "select id,name,email,password from userdata where email = $1",
         [email]
       );
-      if(result.rows.length===0){
-        throw new Error("user not found")
+      if (result.rows.length === 0) {
+        throw new Error("user not found");
       }
       const data = result.rows[0];
-      const match = await bcrypt.compare(password,data.password);
-      if(!match){
-        throw new Error("Invalid password")
+      const match = await bcrypt.compare(password, data.password);
+      if (!match) {
+        throw new Error("Invalid password");
       }
       return data;
     } catch (err) {
       console.error(err.message);
-      throw new Error(err.message||"Login failed")
-      
+      throw new Error(err.message || "Login failed");
     }
   },
-  bestPackage : async()=>{
-    try{
+  bestPackage: async () => {
+    try {
       const response = await connection.query(
         "select id,location,image from best_package"
-      )
-      if(response.rows.length==0){
-        throw new Error("Not found")
+      );
+      if (response.rows.length == 0) {
+        throw new Error("Not found");
       }
-      return response.rows
-    }
-    catch(err){
-
-    }
+      return response.rows;
+    } catch (err) {}
   },
-  visaFree : async()=>{
-    try{
+  visaFree: async () => {
+    try {
       const response = await connection.query(
         "select id,location,image from visa_free"
-      )
-      if(response.rows.length==0){
-        throw new Error("Not found")
+      );
+      if (response.rows.length == 0) {
+        throw new Error("Not found");
       }
-      return response.rows
-    }
-    catch(err){
-
-    }
+      return response.rows;
+    } catch (err) {}
   },
-  internationalTrip : async()=>{
-    try{
+  internationalTrip: async () => {
+    try {
       const response = await connection.query(
         "select id,location,image from international_trip"
-      )
-      if(response.rows.length==0){
-        throw new Error("Not found")
+      );
+      if (response.rows.length == 0) {
+        throw new Error("Not found");
       }
-      return response.rows
-    }
-    catch(err){
-
-    }
+      return response.rows;
+    } catch (err) {}
+  },
+  packageByLocation: async ({ location }) => {
+    try {
+      const response = await connection.query(
+        "select location,cover_img,quote from location_table where location=$1",
+        [location]
+      );
+      if (response.rows.length == 0) {
+        throw new Error("Not found");
+      }
+      return response.rows[0];
+    } catch (err) {}
+  },
+  packageByLocationId: async ({location}) => {
+    try {
+      const response = await connection.query(
+        "select package_img,title,days,description,price,location from packages where location=$1",
+        [location]
+      );
+      if (response.rows.length == 0) {
+        throw new Error("Not found");
+      }
+      return response.rows;
+    } catch (err) {}
   },
 };
 module.exports = root;

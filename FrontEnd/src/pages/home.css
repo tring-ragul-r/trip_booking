@@ -25,6 +25,7 @@
 }
 .home-package-card{
     position: relative;
+    cursor: pointer;
 }
 .home-package-card>img{
     border-radius: 8px;

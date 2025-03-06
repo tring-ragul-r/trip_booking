@@ -7,17 +7,32 @@ const schema = buildSchema(
     name:String,
     email:String
     }
-    type package{
+    type card{
     id:Int,
     location:String,
     image:String
     }
+    type packageLocation{
+    location:String,
+    cover_img:String,
+    quote:String
+    }
+    type package{
+    package_img:String,
+    title:String,
+    days:String,
+    description:String,
+    price:Float,
+    location:String
+    }
 
     type Query{
     signIn(email:String!,password:String!):user
-    bestPackage:[package]
-    visaFree:[package]
-    internationalTrip:[package]
+    bestPackage:[card]
+    visaFree:[card]
+    internationalTrip:[card]
+    packageByLocation(location:String!):packageLocation
+    packageByLocationId(location:String!):[package]
     }
     
 
