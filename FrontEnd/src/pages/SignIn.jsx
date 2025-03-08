@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineMail } from "react-icons/ai";
 import { MdLock } from "react-icons/md";
@@ -9,6 +9,7 @@ import signinImg from "../assets/signup-bg-img.png";
 import logo from "../assets/signup-logo.png";
 const SignIn = () => {
   const navigator = useNavigate();
+ 
   const {
     register,
     handleSubmit,
@@ -31,8 +32,9 @@ const SignIn = () => {
         query,
       });
 
-      console.log(response.data.data.signIn);
+      
       if(response.data.data.signIn){
+        localStorage.setItem('userData',JSON.stringify(response.data.data.signIn))
       navigator("/home");
       }
     } catch (error) {

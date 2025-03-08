@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { createContext, useState } from "react";
 import Layout from "./component/layout/Layout";
 
-function App() {
-  const [count, setCount] = useState(0);
+export const userContext = createContext();
 
+function App() {
+const [userData,setUserData] = useState();
   return <>
+  <userContext.Provider value={{userData,setUserData}}>
   <Layout/>
+  </userContext.Provider>
   </>;
 }
 

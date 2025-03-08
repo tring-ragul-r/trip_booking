@@ -1,30 +1,23 @@
 const { buildSchema } = require("graphql");
+const {userSchema} = require('./schema/user')
+const cardSchema = require('./schema/card')
+const packageLocationSchema = require('./schema/packageLocation')
+const package = require('./schema/package')
+// console.log('userSchema',userSchema)
+// console.log(cardSchema)
+// console.log(packageLocationSchema);
+
 
 const schema = buildSchema(
   `
-    type user{
-    id:ID,
-    name:String,
-    email:String
-    }
-    type card{
-    id:Int,
-    location:String,
-    image:String
-    }
-    type packageLocation{
-    location:String,
-    cover_img:String,
-    quote:String
-    }
-    type package{
-    package_img:String,
-    title:String,
-    days:String,
-    description:String,
-    price:Float,
-    location:String
-    }
+
+    ${userSchema}
+    
+    ${cardSchema}
+    
+    ${packageLocationSchema}
+
+    ${package}
 
     type Query{
     signIn(email:String!,password:String!):user
