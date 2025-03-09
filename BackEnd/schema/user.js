@@ -1,7 +1,7 @@
-let userSchema = `type user{
+let userSchema = `
     id:ID,
     name:String,
     email:String
-    }`;
+    `
 
 module.exports = {userSchema};

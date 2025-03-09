@@ -89,7 +89,7 @@ const root = {
   packageByLocationId: async ({location}) => {
     try {
       const response = await connection.query(
-        "select package_img,title,days,description,price,location from packages where location=$1",
+        "select packageid,package_img,title,days,description,price,location from packages where location=$1",
         [location]
       );
       if (response.rows.length == 0) {
@@ -98,5 +98,51 @@ const root = {
       return response.rows;
     } catch (err) {}
   },
+  insertBooking: async ({ packageid, booking_date, count, total_price, userid }) => {
+    try {
+      const query = `
+        INSERT INTO bookPackage(packageId, booking_date, count, total_price, userId)
+        VALUES ($1, $2, $3, $4, $5)
+      `;
+      const values = [packageid, booking_date, count, total_price, userid];
+      const result = await connection.query(query, values);
+      if (result.rowCount > 0) {
+        return "Booking inserted successfully!";
+      } else {
+        throw new Error("Booking insertion failed");
+      }
+    } catch (err) {
+      console.error("Error in insertBooking resolver:", err.message);
+      throw new Error(err.message);
+    }
+  },
+  getBookingByUser: async ({ userId }) => {
+    try {
+      const query = `
+        SELECT 
+          bp.packageid, 
+          bp.booking_date, 
+          bp.count, 
+          bp.total_price, 
+          bp.userid,
+          p.package_img, 
+          p.title, 
+          p.days, 
+          p.description, 
+          p.price, 
+          p.location
+        FROM bookPackage bp
+        JOIN packages p ON bp.packageid = p.packageid
+        WHERE bp.userid = $1
+      `;
+      const result = await connection.query(query, [userId]);
+      console.log(result.rows)
+      return result.rows;
+    } catch (error) {
+      console.error("Error fetching bookings:", error);
+      throw new Error("Could not fetch bookings");
+    }
+  },
+
 };
 module.exports = root;

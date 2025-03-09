@@ -32,6 +32,7 @@ const navigate = useNavigate();
     query{
         packageByLocationId(location:"${location}")
         {
+          packageid
           package_img
           title
           days
@@ -54,6 +55,8 @@ const navigate = useNavigate();
     fetchPackagesById();
   }, [location]);
   const handlePackage = (data)=>{
+    console.log(data);
+    
     navigate('/bookpackage',{state:{package:data}})
   }
 

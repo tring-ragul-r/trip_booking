@@ -1,6 +1,6 @@
 import React from "react";
 import "./PackageCart.css";
-import NoPackage from '../assets/notFound.png';
+import NoPackage from "../assets/notFound.png";
 
 const PackageCart = () => {
   const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
@@ -23,23 +23,25 @@ const PackageCart = () => {
             alt={booking.packageData.title}
             className="booking-image"
           />
-          <h1>{booking.packageData.title}</h1>
-          <p>
-            <strong>Location:</strong> {booking.packageData.location}
-          </p>
-          <p>
-            <strong>Price per person:</strong> ₹{booking.packageData.price}
-          </p>
-          <p>
-            <strong>Duration:</strong> {booking.packageData.days}
-          </p>
-          <p>
-            <strong>Description:</strong> {booking.packageData.description}
-          </p>
-          <p>
-            <strong>Number of persons:</strong> {booking.count}
-          </p>
-          <h2>Total Price: ₹{booking.totalPrice}</h2>
+          <div className="booking-details">
+            <h1>{booking.packageData.title}</h1>
+            <p>
+              <strong>Location:</strong> {booking.packageData.location}
+            </p>
+            <p>
+              <strong>Price per person:</strong> ₹{booking.packageData.price}
+            </p>
+            <p>
+              <strong>Duration:</strong> {booking.packageData.days}
+            </p>
+            <p>
+              <strong>Places:</strong> {booking.packageData.description}
+            </p>
+            <p>
+              <strong>Number of persons:</strong> {booking.count}
+            </p>
+            <h2>Total Price: ₹{booking.totalPrice}</h2>
+          </div>
         </div>
       ))}
     </div>
