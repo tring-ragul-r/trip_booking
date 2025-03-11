@@ -5,42 +5,53 @@ const root = {
   signUp: async ({ name, email, password }) => {
     try {
       const hashedPassword = await bcrypt.hash(password, 10);
+      const isPresent = `select email from userdata where email = ${email}` 
       const res = await connection.query(
         "INSERT INTO userdata (name, email, password) VALUES ($1, $2, $3) RETURNING id",
         [name, email, hashedPassword]
       );
-      console.log(res.rows);
+      //console.log(res.rows);
+      return "User signed up successfully!";
 
       if (res.rowCount > 0) {
         return "User signed up successfully!";
       } else {
-        throw new Error("Failed to sign up user");
+        return "userAlreadyExits";
       }
     } catch (err) {
+      return "userAlreadyExits";
       console.error("Error in signUp resolver:", err.message);
       throw new Error(err.message);
     }
   },
   signIn: async ({ email, password }) => {
     try {
+      console.log(email);
+      
       const result = await connection.query(
-        "select id,name,email,password from userdata where email = $1",
+        "SELECT id, name, email, password FROM userdata WHERE email = $1",
         [email]
       );
+  
       if (result.rows.length === 0) {
-        throw new Error("user not found");
+        throw new Error("user not found")
+
       }
-      const data = result.rows[0];
-      const match = await bcrypt.compare(password, data.password);
+  
+      const user = result.rows[0];
+      const match = await bcrypt.compare(password, user.password);
+  
       if (!match) {
         throw new Error("Invalid password");
       }
-      return data;
+      return user;
     } catch (err) {
-      console.error(err.message);
-      throw new Error(err.message || "Login failed");
+      console.error(">>>>>Error in signIn:", err.message);
+       throw new Error(err.message || "Login failed");
+      //return {EmailError:true}
     }
   },
+  
   bestPackage: async () => {
     try {
       const response = await connection.query(
@@ -96,7 +107,23 @@ const root = {
         throw new Error("Not found");
       }
       return response.rows;
-    } catch (err) {}
+    } catch (err) {
+
+    }
+  },
+  allPackages: async () => {
+    try{
+      const response = await connection.query(
+        "select packageid,package_img,title,days,description,price,location from packages"
+      );
+      if (response.rows.length == 0) {
+        throw new Error("Packages Not found");
+      }
+      return response.rows;
+    }
+    catch(err){
+
+    }
   },
   insertBooking: async ({ packageid, booking_date, count, total_price, userid }) => {
     try {

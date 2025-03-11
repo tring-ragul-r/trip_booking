@@ -1,13 +1,15 @@
 .package-cart-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 20px;
   padding: 10px;
+  justify-content: center; 
 }
 
 .booking-card {
   display: flex;
   flex-direction: column;
+  width: 300px;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
@@ -25,19 +27,19 @@
   padding: 12px;
 }
 
-.booking-details h1 {
+.booking-details>h1 {
   margin-top: 0;
   font-size: 20px;
   color: #333;
 }
 
-.booking-details p {
+.booking-details>p {
   font-size: 14px;
   margin: 6px 0;
   color: #555;
 }
 
-.booking-details h2 {
+.booking-details>h2 {
   margin-top: 10px;
   font-size: 18px;
   color: #333;
@@ -65,15 +67,20 @@
   color: #333;
 }
 
-
 @media (max-width: 768px) {
-  .booking-details h1 {
+  .booking-card {
+    width: 100%; 
+  }
+  
+  .booking-details > h1 {
     font-size: 18px;
   }
-  .booking-details p {
+
+  .booking-details > p {
     font-size: 13px;
   }
-  .booking-details h2 {
+
+  .booking-details > h2 {
     font-size: 16px;
   }
 }

@@ -6,17 +6,63 @@ import SignIn from "../pages/SignIn";
 import Package from "../pages/Package";
 import BookPackage from "../pages/BookPackage";
 import PackageCart from "../pages/PackageCart";
+import LandlingPage from "../pages/LandlingPage";
+import ProtectedRoute from "../component/ProtectedRoutes/ProtectedRoute";
+import AllPackages from "../pages/AllPackages";
+import ScrollToTop from "../component/scrollToTop/ScrollToTop";
 const Routers = () => {
   return (
+    <>
+    <ScrollToTop/>
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/home" element={<Home />} />
+      <Route path="/" element={<LandlingPage />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/signin" element={<SignIn />} />
-      <Route path="/package/:location" element={<Package />} />
-      <Route path="/bookpackage" element={<BookPackage />} />
-      <Route path = "/cart" element={<PackageCart />} />
+      <Route
+        path="/home"
+        element={
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/package/:location"
+        element={
+          <ProtectedRoute>
+            <Package />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/bookpackage"
+        element={
+          <ProtectedRoute>
+            <BookPackage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/cart"
+        element={
+           <ProtectedRoute>
+            <PackageCart />
+           </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/allpackages"
+        element={
+          <ProtectedRoute>
+            <AllPackages />
+          </ProtectedRoute>
+        }
+      />
+      
     </Routes>
+    
+    </>
+
   );
 };
 

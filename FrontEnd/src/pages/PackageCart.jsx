@@ -1,9 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./PackageCart.css";
 import NoPackage from "../assets/notFound.png";
 
 const PackageCart = () => {
-  const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+  const [bookings, setBookings] = useState([]);
+
+  const userid = JSON.parse(localStorage.getItem("userData"))?.id;
+  const fetchBooking = async () => {
+    const query = `
+    query {
+      getBookingByUser(userId: ${userid}) {
+        packageid
+        booking_date
+        count
+        total_price
+        userid
+        package_img
+        title
+        days
+        description
+        price
+        location
+      }
+    }
+`;
+    const response = await axios.post("http://localhost:3000/graphql", {
+      query,
+    });
+    setBookings(response.data.data.getBookingByUser);
+  };
+
+  useEffect(() => {
+    fetchBooking();
+  }, [userid]);
 
   if (bookings.length === 0) {
     return (
@@ -16,31 +46,34 @@ const PackageCart = () => {
 
   return (
     <div className="package-cart-container">
-      {bookings.map((booking, index) => (
+      {bookings.map((booking) => (
         <div key={index} className="booking-card">
           <img
-            src={booking.packageData.package_img}
-            alt={booking.packageData.title}
+            src={booking.package_img}
+            alt={booking.title}
             className="booking-image"
           />
           <div className="booking-details">
-            <h1>{booking.packageData.title}</h1>
+            <h1>{booking.title}</h1>
             <p>
-              <strong>Location:</strong> {booking.packageData.location}
+              <b>Location:</b> {booking.location}
             </p>
             <p>
-              <strong>Price per person:</strong> ₹{booking.packageData.price}
+              <b>Price per person:</b> ₹{booking.price}
             </p>
             <p>
-              <strong>Duration:</strong> {booking.packageData.days}
+              <b>Duration:</b> {booking.days}
             </p>
             <p>
-              <strong>Places:</strong> {booking.packageData.description}
+              <b>Description:</b> {booking.description}
             </p>
             <p>
-              <strong>Number of persons:</strong> {booking.count}
+              <b>Number of persons:</b> {booking.count}
             </p>
-            <h2>Total Price: ₹{booking.totalPrice}</h2>
+            <p>
+              <b>Date of Travel:</b> {booking.booking_date}
+            </p>
+            <h2>Total Price: ₹{booking.total_price}</h2>
           </div>
         </div>
       ))}

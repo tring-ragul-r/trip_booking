@@ -1,0 +1,49 @@
+.booking-popup{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+.booking-popup-outer-con{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+.booking-pop-con{
+    text-align: center;
+    border-radius: 20px;
+    width: 30%;
+    height: 35%;
+    background-color: #fff;
+}
+.booking-popup-title{
+    font-weight: 700;
+    font-size: 2rem;
+    color: #1565c0;
+}
+.booking-popup-btns{
+    width: 100%;
+    display: flex;
+    column-gap: 25px;
+    justify-content: center;
+}
+.booking-popup-btns>button{
+    height: 35px;
+    width: 90px;
+    border: transparent;
+    border-radius: 25px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+    cursor: pointer;
+}
+.booking-popup-book-btn{
+    background-color: #0d47a1;
+}
+.booking-popup-cancel-btn{
+    background-color: rgb(238, 58, 58);
+}

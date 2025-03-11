@@ -55,7 +55,7 @@ const navigate = useNavigate();
     fetchPackagesById();
   }, [location]);
   const handlePackage = (data)=>{
-    console.log(data);
+    //console.log(data);
     
     navigate('/bookpackage',{state:{package:data}})
   }
@@ -83,7 +83,7 @@ const navigate = useNavigate();
                 />
                 <div className="package-card-title-con">
                   <h2 className="package-card-title">{data?.title}</h2>
-                  <span >{data?.days}</span>
+                  <span className="package-card-duration">{data?.days}</span>
                 </div>
                 <p className="pacakge-card-desc">{data?.description}</p>
                 <div className="package-card-btn">

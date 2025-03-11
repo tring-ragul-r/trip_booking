@@ -6,20 +6,27 @@ import { MdLock } from "react-icons/md";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./signup.css";
-import signupImg from "../assets/signup-bg-img.png";
-import logo from "../assets/signup-logo.png";
+import travelImg from "../assets/Auth_img.jpg";
+import { toast } from "react-toastify";
+import ShowPassword from "../component/showPassword/ShowPassword";
+
 const SignUp = () => {
   const navigator = useNavigate();
+  const[showPassword,setShowPassword] = useState(false);
+  const[password,setPassword] = useState();
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
+  const handlePassword = (e)=>{
+    setPassword(e.target.value);
+  }
 
   const submit = async (data) => {
     console.log("hi");
-    
+
     const query = `
         mutation {
       signUp(name: "${data.name}", email: "${data.email}", password: "${data.password}")
@@ -31,26 +38,21 @@ const SignUp = () => {
         query,
       });
 
-      console.log(response.data.data.signUp);
-      
-      navigator("/signin")
-      
+      if (response.data.data.signUp == "User signed up successfully!") {
+        toast.success("User register Successfull");
+        setPassword(null);
+        navigator("/signin");
+      } else {
+        toast.error("user is already Exists");
+      }
     } catch (error) {
-      //console.error(error);
+      toast.error("User register ");
     }
   };
   return (
     <div className="signup-outer-con">
       <div className="signup-con1">
-        <img src={signupImg} alt="" />
-        <div className="signup-con1-inner">
-          <img src={logo} alt="" />
-          <h2>Start New Jounery!</h2>
-          <div>
-            <p>Already have an Account?</p>
-            <button>Sign In</button>
-          </div>
-        </div>
+        <img src={travelImg} alt="" />
       </div>
       <div className="signup-con2">
         <div className="signup-form-con">
@@ -63,7 +65,7 @@ const SignUp = () => {
                   type="text"
                   placeholder="Name"
                   {...register("name", { required: "Name required" })}
-                />
+                  />
               </div>
               <span className="signup-icon">
                 <FaUser />
@@ -94,7 +96,7 @@ const SignUp = () => {
               <label>Password</label>
               <div className="input-con">
                 <input
-                  type="password"
+                  type={!showPassword?"password":"text"}
                   placeholder="Password"
                   {...register("password", {
                     required: "password required",
@@ -103,20 +105,30 @@ const SignUp = () => {
                         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$/,
                       message: "password format is wrong",
                     },
-                  })}
+                  })} onChange={handlePassword}
                 />
+               
               </div>
               <span className="signup-icon">
                 <MdLock />
               </span>
+            {password &&  <span className="signup-password-icon"><ShowPassword show={showPassword} setShow={setShowPassword} /></span>}
               {errors.password && (
                 <p className="error">{errors.password.message}</p>
               )}
             </div>
-            <a>forget your password?</a>
-          <button type="submit">Sign Up</button>
+            <p className="have-account">
+              Already have an Account ?
+              <span
+                onClick={() => {
+                  navigator("/signin");
+                }}
+              >
+                Sign In
+              </span>
+            </p>
+            <button type="submit">Sign Up</button>
           </form>
-          
         </div>
       </div>
     </div>

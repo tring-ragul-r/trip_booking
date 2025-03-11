@@ -1,21 +1,25 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineMail } from "react-icons/ai";
 import { MdLock } from "react-icons/md";
 import axios from "axios";
 import "./signin.css";
 import { useNavigate } from "react-router-dom";
-import signinImg from "../assets/signup-bg-img.png";
-import logo from "../assets/signup-logo.png";
+import travelImg from "../assets/Auth_img.jpg";
+import { toast } from "react-toastify";
+import ShowPassword from "../component/showPassword/ShowPassword";
 const SignIn = () => {
   const navigator = useNavigate();
- 
+  const [showPassword, setShowPassword] = useState(false);
+  const [password, setPassword] = useState();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+  };
   const submit = async (data) => {
     const query = `
         query {
@@ -32,10 +36,22 @@ const SignIn = () => {
         query,
       });
 
-      
-      if(response.data.data.signIn){
-        localStorage.setItem('userData',JSON.stringify(response.data.data.signIn))
-      navigator("/home");
+      if (response.data.data.signIn) {
+        localStorage.setItem(
+          "userData",
+          JSON.stringify(response.data.data.signIn)
+        );
+        toast.success("Login Successfull!");
+        setPassword(null);
+        navigator("/home");
+      }
+      const errmsg = response?.data?.errors[0]?.message;
+      console.log(errmsg);
+
+      if (errmsg == "user not found") {
+        toast.error("user not found");
+      } else if (errmsg === "Invalid password") {
+        toast.error("Invalid password");
       }
     } catch (error) {
       console.error("Error signing in:", error);
@@ -45,15 +61,7 @@ const SignIn = () => {
   return (
     <div className="signin-outer-con">
       <div className="signin-con1">
-        <img src={signinImg} alt="" />
-        <div className="signin-con1-inner">
-          <img src={logo} alt="" />
-          <h2>LogIn To Travel</h2>
-          <div>
-            <p>Don't have an Account?</p>
-            <button>Sign Up</button>
-          </div>
-        </div>
+        <img src={travelImg} alt="" />
       </div>
       <div className="signin-con2">
         <div className="signin-form-con">
@@ -67,10 +75,6 @@ const SignIn = () => {
                   placeholder="Email"
                   {...register("email", {
                     required: "Email required",
-                    pattern: {
-                      value: /^[a-z0-9-._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
-                      message: "Email format is incorrect",
-                    },
                   })}
                 />
               </div>
@@ -83,26 +87,35 @@ const SignIn = () => {
               <label>Password</label>
               <div className="input-con">
                 <input
-                  type="password"
+                  type={!showPassword ? "password" : "text"}
                   placeholder="Password"
                   {...register("password", {
                     required: "Password required",
-                    pattern: {
-                      value:
-                        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$/,
-                      message: "Password format is incorrect",
-                    },
-                  })}
+                  })} onChange={handlePassword}
                 />
               </div>
               <span className="signin-icon">
                 <MdLock />
               </span>
+              {password && (
+                <span className="signup-password-icon">
+                  <ShowPassword show={showPassword} setShow={setShowPassword} />
+                </span>
+              )}
               {errors.password && (
                 <p className="error">{errors.password.message}</p>
               )}
             </div>
-            <a href="#">Forgot your password?</a>
+            <p className="have-account">
+              Don't have an Account ?
+              <span
+                onClick={() => {
+                  navigator("/signup");
+                }}
+              >
+                Sign Up
+              </span>
+            </p>
             <button type="submit">Sign In</button>
           </form>
         </div>

@@ -1,0 +1,41 @@
+.land-page-con{
+    position: fixed;
+    width: 100%;
+}
+
+.land-page-con>img{
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+}
+.landing-content-con{
+color: #fff;
+position: absolute;
+top: 20%;
+left: 30%;
+text-align: center;
+height: 60%;
+width: 40%;
+}
+.landing-content-con>p{
+    margin: 0px;
+}
+.land-content-time{
+    background-color: darkturquoise;
+    margin-left: 15px;
+    margin-top: 50px;
+    font-weight: 600;
+    font-size: 17px;
+}
+.land-content-travel{
+    font-size: 4rem;
+    font-weight: 700;
+}
+.land-content-title{
+    font-size: 4rem;
+    font-weight: 700;
+
+}
+.land-content-title+p{
+    font-size: 2rem;
+}

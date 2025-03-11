@@ -1,141 +1,4 @@
-/* 
 
-.book-package-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #e0f7fa; 
-  padding: 20px;
-}
-
-.book-package-card {
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-  max-width: 900px;
-  background-color: #e3f2fd; 
-  border-radius: 16px;
-  overflow: hidden;
-}
-
-.package-image-con {
-  width: 100%;
-  height: 300px;
-  overflow: hidden;
-}
-
-.package-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.package-detail-con {
-  padding: 20px;
-  background-color: white;
-}
-
-.package-title {
-  font-size: 32px;
-  font-weight: bold;
-  color: #1565c0; 
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.package-subtitle {
-  font-size: 24px;
-  font-weight: 600;
-  color: #0d47a1; 
-  margin-bottom: 10px;
-}
-
-.package-location,
-.package-price,
-.package-duration {
-  font-size: 16px;
-  margin-bottom: 10px;
-  color: #37474f;
-}
-
-.package-price > span {
-  font-weight: bold;
-  color: #1565c0; 
-}
-
-.package-description {
-  font-size: 16px;
-  color: #546e7a; 
-  margin-bottom: 20px;
-}
-
-.add-person-con {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px 0;
-}
-
-.add-person-con > button {
-  font-size: 24px;
-  width: 40px;
-  height: 40px;
-  margin: 0 10px;
-  background: linear-gradient(45deg, #4fc3f7, #0288d1);
-  border: none;
-  border-radius: 50%;
-  color: #fff;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.add-person-con > p {
-  font-size: 19px;
-  font-weight: bold;
-  margin: 0 10px;
-  color: #37474f;
-}
-
-.calendar-container {
-  margin: 20px 0;
-}
-
-.calendar-container > h3 {
-  font-size: 19px;
-  font-weight: bold;
-  color: #1565c0;
-  margin-bottom: 10px;
-}
-
-.total-price {
-  font-size: 24px;
-  font-weight: bold;
-  color: #1565c0; 
-  text-align: center;
-  margin: 20px 0;
-  padding-top: 10px;
-  border-top: 2px solid #b0bec5; 
-}
-
-.book-btn {
-  display: block;
-  width: 100%;
-  padding: 12px 20px;
-  background: linear-gradient(45deg, #4fc3f7, #0288d1);
-  color: #fff;
-  font-size: 19px;
-  font-weight: bold;
-  text-align: center;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.book-btn:hover {
-  background: linear-gradient(45deg, #0288d1, #01579b);
-} */
 .book-package-container {
   display: flex;
   justify-content: center;
@@ -149,11 +12,9 @@
   display: flex;
   flex-direction: column;
   width: 80%;
-  max-width: 900px;
   background-color: #e3f2fd;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .package-image-con {
@@ -190,7 +51,8 @@
 
 .package-location,
 .package-price,
-.package-duration {
+.package-duration,
+.selected-date  {
   font-size: 16px;
   margin-bottom: 10px;
   color: #37474f;
@@ -224,12 +86,8 @@
   border-radius: 50%;
   color: #fff;
   cursor: pointer;
-  transition: transform 0.2s ease;
 }
 
-.add-person-con > button:hover {
-  transform: scale(1.1);
-}
 
 .add-person-con > p {
   font-size: 19px;
@@ -252,23 +110,12 @@
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-.toggle-calendar-btn:hover {
-  background-color: #0056b3;
 }
 
 .calendar-container {
   margin: 20px 0;
 }
 
-.selected-date {
-  margin-top: 10px;
-  font-size: 16px;
-  color: #333;
-  text-align: center;
-}
 
 .total-price {
   font-size: 24px;
@@ -292,10 +139,4 @@
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.book-btn:hover {
-  background: linear-gradient(45deg, #0288d1, #01579b);
-  transform: scale(1.05);
 }

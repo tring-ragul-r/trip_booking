@@ -28,13 +28,14 @@ const schema = buildSchema(
     
 
     type Query{
-    signIn(email:String!,password:String!):user
-    bestPackage:[card]
-    visaFree:[card]
-    internationalTrip:[card]
-    packageByLocation(location:String!):packageLocation
-    packageByLocationId(location:String!):[package]
-    getBookingByUser(userId: Int!): [Booking]
+      signIn(email:String!,password:String!):user
+      bestPackage:[card]
+      visaFree:[card]
+      internationalTrip:[card]
+      packageByLocation(location:String!):packageLocation
+      packageByLocationId(location:String!):[package]
+      allPackages:[package]
+      getBookingByUser(userId: Int!): [Booking]
     }
     
 

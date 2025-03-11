@@ -1,0 +1,32 @@
+.all-packages-outer-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    background: rgba(245, 245, 245, 0.3);
+}
+.all-packages-title{
+    font-size: 35px;
+    color: #007bff;
+    text-align: center; 
+    
+    
+}
+.all-packages-container{
+    width: 75%;
+    height: 100vh;
+    padding: 25px;
+    gap: 30px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    justify-content: space-evenly;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
