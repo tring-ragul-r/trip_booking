@@ -11,6 +11,7 @@ import ProtectedRoute from "../component/protectedRoutes/ProtectedRoute";
 import RestrictedRoute from "../component/protectedRoutes/RestrictedRoute";
 import AllPackages from "../pages/AllPackages";
 import ScrollToTop from "../component/scrollToTop/ScrollToTop";
+import Faqs from "../component/faqs/Faqs";
 const Routers = () => {
   return (
     <>
@@ -66,6 +67,7 @@ const Routers = () => {
             </ProtectedRoute>
           }
         />
+        <Route path = '/faqs' element={<Faqs/>} />
       </Routes>
     </>
   );

@@ -36,6 +36,7 @@ const schema = buildSchema(
       packageByLocationId(location:String!):[package]
       allPackages:[package]
       getBookingByUser(userId: Int!): [Booking]
+      getPackagesByMaxPrice:[package]
     }
     
 

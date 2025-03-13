@@ -144,7 +144,7 @@ const root = {
   getBookingByUser: async ({ userId }) => {
     try {
       const query = `
-        SELECT 
+        select 
           bp.packageid, 
           bp.booking_date, 
           bp.count, 
@@ -156,15 +156,37 @@ const root = {
           p.description, 
           p.price, 
           p.location
-        FROM bookPackage bp
-        JOIN packages p ON bp.packageid = p.packageid
-        WHERE bp.userid = $1
+        from bookPackage bp
+        join packages p ON bp.packageid = p.packageid
+        where bp.userid = $1
       `;
       const result = await connection.query(query, [userId]);
+      if(result.rowCount>0){
       return result.rows;
+      }
+      else{
+        throw new Error("User Booking is not Found")
+      }
     } catch (error) {
       console.error("Error fetching bookings:", error);
       throw new Error("Could not fetch bookings");
+    }
+  },
+  getPackagesByMaxPrice : async () =>{
+    try{
+      const query = `
+      SELECT p.* FROM packages p WHERE p.price = (SELECT MAX(p2.price) FROM packages p2 WHERE p2.location = p.location);
+      `
+      const result = await connection.query(query);
+      if(result.rowCount>0){
+        return result.rows;
+      }
+      else{
+        return new Error("packages not Found !")
+      }
+    }
+    catch(err){
+
     }
   },
 
