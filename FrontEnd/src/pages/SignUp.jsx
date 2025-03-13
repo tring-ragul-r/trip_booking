@@ -5,7 +5,7 @@ import { AiOutlineMail } from "react-icons/ai";
 import { MdLock } from "react-icons/md";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./signup.css";
+import "./SignUp.css";
 import travelImg from "../assets/Auth_img.jpg";
 import { toast } from "react-toastify";
 import ShowPassword from "../component/showPassword/ShowPassword";
@@ -64,7 +64,10 @@ const SignUp = () => {
                 <input
                   type="text"
                   placeholder="Name"
-                  {...register("name", { required: "Name required" })}
+                  {...register("name", { required: "Name required", pattern:{
+                    value:/^[A-Za-z ]+$/,
+                    message:"name should contain alphabet only"
+                  } })}
                   />
               </div>
               <span className="signup-icon">

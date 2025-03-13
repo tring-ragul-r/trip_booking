@@ -30,9 +30,7 @@
 .home-package-card>img{
     border-radius: 8px;
 }
-/* ::-webkit-scrollbar{
-    display: none;
-} */
+
 .home-package-card>p{
     position: absolute;
     bottom: 4px;
@@ -42,7 +40,6 @@
     width: 100%;
     color: white;
     font-weight: 800;
-    /* background-color: darkgray; */
     display: block;
     text-align: center;
     background-image: linear-gradient(to bottom,rgba(189, 186, 186, 0.121),rgb(124, 120, 120));

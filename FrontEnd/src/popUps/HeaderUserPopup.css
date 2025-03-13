@@ -1,0 +1,30 @@
+.header-popup-container {
+    position: fixed;
+    background: #fff;
+    top: 70px;
+    right: 0;
+    color: #000;
+    text-align: center;
+    width: 230px;
+
+}
+.header-email-popup-container{
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+.user-logo-popup{
+    margin-top: 13px;
+}
+.header-popup-email{
+    font-size: 13px;
+}
+.logout-button  {
+    background-color: #f44336;
+    color: #fff;
+    width: 100%;
+    padding: 5px 0px;
+    font-size: 17px;
+    border: 1px solid #f44336;
+    cursor: pointer;
+}

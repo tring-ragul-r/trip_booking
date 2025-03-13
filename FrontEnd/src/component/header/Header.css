@@ -17,7 +17,9 @@
 }
 
 .logo {
-  margin: 0;
+  margin-top:-5px;
+  width: 200px;
+  height: 40px;
   font-size: 32px;
   font-weight: bold;
 }
@@ -37,7 +39,9 @@
 }
 .user-name-container{
   display: flex;
+  margin-right: 30px;
   gap:5px;
+  cursor: pointer;
   font-size :20px;
 }
 

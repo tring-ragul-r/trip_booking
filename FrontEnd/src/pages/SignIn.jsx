@@ -3,11 +3,12 @@ import { useForm } from "react-hook-form";
 import { AiOutlineMail } from "react-icons/ai";
 import { MdLock } from "react-icons/md";
 import axios from "axios";
-import "./signin.css";
+import "./SignIn.css";
 import { useNavigate } from "react-router-dom";
 import travelImg from "../assets/Auth_img.jpg";
 import { toast } from "react-toastify";
 import ShowPassword from "../component/showPassword/ShowPassword";
+
 const SignIn = () => {
   const navigator = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
@@ -91,7 +92,8 @@ const SignIn = () => {
                   placeholder="Password"
                   {...register("password", {
                     required: "Password required",
-                  })} onChange={handlePassword}
+                  })}
+                  onChange={handlePassword}
                 />
               </div>
               <span className="signin-icon">

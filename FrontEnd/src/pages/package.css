@@ -97,7 +97,7 @@ hr {
   display: flex;
   flex-direction: column;
   position: relative;
-  min-height: 320px; 
+  min-height: 340px; 
 }
 
 .package-card-img {
@@ -134,9 +134,7 @@ hr {
   color: #666;
   padding: 0 15px;
   margin: 10px 0;
-  text-overflow: ellipsis;
   overflow: hidden;
-  white-space: nowrap;
 }
 
 .package-card-btn {
@@ -163,7 +161,7 @@ hr {
 }
 
 .package-card-btn > button>span{
-  color: #000;
+  color: #ffffff;
   font-size: 14px;
   font-weight: 500;
 }

@@ -1,17 +1,15 @@
 const connection = require("./dbConnect.js");
 const bcrypt = require("bcrypt");
+const sendBookingEmail = require("./Mail/mail.js");
 
 const root = {
   signUp: async ({ name, email, password }) => {
     try {
       const hashedPassword = await bcrypt.hash(password, 10);
-      const isPresent = `select email from userdata where email = ${email}` 
       const res = await connection.query(
         "INSERT INTO userdata (name, email, password) VALUES ($1, $2, $3) RETURNING id",
         [name, email, hashedPassword]
       );
-      //console.log(res.rows);
-      return "User signed up successfully!";
 
       if (res.rowCount > 0) {
         return "User signed up successfully!";
@@ -20,8 +18,7 @@ const root = {
       }
     } catch (err) {
       return "userAlreadyExits";
-      console.error("Error in signUp resolver:", err.message);
-      throw new Error(err.message);
+      
     }
   },
   signIn: async ({ email, password }) => {
@@ -46,9 +43,7 @@ const root = {
       }
       return user;
     } catch (err) {
-      console.error(">>>>>Error in signIn:", err.message);
        throw new Error(err.message || "Login failed");
-      //return {EmailError:true}
     }
   },
   
@@ -125,7 +120,7 @@ const root = {
 
     }
   },
-  insertBooking: async ({ packageid, booking_date, count, total_price, userid }) => {
+  insertBooking: async ({ packageid, booking_date, count, total_price, userid,email }) => {
     try {
       const query = `
         INSERT INTO bookPackage(packageId, booking_date, count, total_price, userId)
@@ -134,6 +129,9 @@ const root = {
       const values = [packageid, booking_date, count, total_price, userid];
       const result = await connection.query(query, values);
       if (result.rowCount > 0) {
+        console.log(email);
+        await sendBookingEmail(email,booking_date,count,total_price);
+        
         return "Booking inserted successfully!";
       } else {
         throw new Error("Booking insertion failed");
@@ -163,7 +161,6 @@ const root = {
         WHERE bp.userid = $1
       `;
       const result = await connection.query(query, [userId]);
-      console.log(result.rows)
       return result.rows;
     } catch (error) {
       console.error("Error fetching bookings:", error);

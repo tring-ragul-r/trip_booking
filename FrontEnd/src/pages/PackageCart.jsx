@@ -33,7 +33,7 @@ const PackageCart = () => {
 
   useEffect(() => {
     fetchBooking();
-  }, [userid]);
+  }, [bookings]);
 
   if (bookings.length === 0) {
     return (
@@ -47,7 +47,7 @@ const PackageCart = () => {
   return (
     <div className="package-cart-container">
       {bookings.map((booking) => (
-        <div key={index} className="booking-card">
+        <div className="booking-card">
           <img
             src={booking.package_img}
             alt={booking.title}

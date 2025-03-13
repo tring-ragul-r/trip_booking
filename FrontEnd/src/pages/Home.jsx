@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./home.css";
+import "./Home.css";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
@@ -22,7 +22,6 @@ const Home = () => {
       query,
     });
     setBestpackage(response.data.data.bestPackage);
-    //console.log("321")
   };
   const fetchApi2 = async () => {
     const query = `
@@ -38,7 +37,6 @@ const Home = () => {
       query,
     });
     setVisaFree(response.data.data.visaFree);
-    //console.log("321")
   };
   const fetchApi3 = async () => {
     const query = `
@@ -54,7 +52,6 @@ const Home = () => {
       query,
     });
     setInternationalTrip(response.data.data.internationalTrip);
-    //console.log("321")
   };
   useEffect(() => {
     fetchApi1();
@@ -63,8 +60,6 @@ const Home = () => {
   }, []);
 
   const handleCard = (card) => {
-    
-    console.log(card.location);
     navigator(`/package/${card.location}`)
   };
   return (

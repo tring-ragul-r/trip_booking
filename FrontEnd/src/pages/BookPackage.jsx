@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./bookPackage.css";
 import { toast } from "react-toastify";
-import BookingPackages from "../ConfirmPopUps/BookingPackages";
+import BookingPackages from "../popUps/BookingPackages";
 export const Booking = async (packageDetials)=>{
   console.log(packageDetials);
   
@@ -17,10 +17,10 @@ export const Booking = async (packageDetials)=>{
 
 const userid = packageDetials?.userid;
 const packageid = packageDetials?.packageid;
-
+const email = packageDetials?.email;
 const query = `
   mutation{
-insertBooking(packageid: ${packageid}, booking_date: "${booking_date}", count: ${packageDetials.count}, total_price: ${packageDetials.totalPrice}, userid: ${userid})
+insertBooking(packageid: ${packageid}, booking_date: "${booking_date}", count: ${packageDetials.count}, total_price: ${packageDetials.totalPrice}, userid: ${userid}, email: "${email}")
 }
 
 `;
@@ -46,11 +46,13 @@ function BookPackage() {
   const [showCalendar, setShowCalendar] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [popup,setPopup] = useState(false);
+  const userData = JSON.parse(localStorage.getItem("userData"))
   let bookingDetails = {
-    userid:JSON.parse(localStorage.getItem("userData"))?.id,
+    userid:userData?.id,
     totalPrice,
     booking_date:selectedDate,
     count,
+    email:userData?.email,
     packageid:packageData?.packageid
   }
 

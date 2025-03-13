@@ -75,11 +75,11 @@
   width: 85%;
   height: 96%;
   border-radius: 7px;
+  padding-left: 13px;
   background-color: #7ac9e9;
 }
 
 .form-body > div > input::placeholder {
-  padding-left: 13px;
   color: black;
   font-weight: 700;
 }

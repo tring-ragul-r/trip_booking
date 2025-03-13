@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import "./package.css";
+import "./Package.css";
 
 const Package = () => {
   const { location } = useParams();
@@ -55,7 +55,6 @@ const navigate = useNavigate();
     fetchPackagesById();
   }, [location]);
   const handlePackage = (data)=>{
-    //console.log(data);
     
     navigate('/bookpackage',{state:{package:data}})
   }
