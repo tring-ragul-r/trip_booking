@@ -29,6 +29,7 @@ const schema = buildSchema(
 
     type Query{
       signIn(email:String!,password:String!):user
+      getUserDataById(id:Int!):user
       bestPackage:[card]
       visaFree:[card]
       internationalTrip:[card]
@@ -41,8 +42,9 @@ const schema = buildSchema(
     
 
     type Mutation{
-        signUp(name:String!,email:String!,password:String!):String
+        signUp(name:String!,email:String!,password:String!,phonenumber:String!):String
         insertBooking(packageid:Int!,booking_date:String!,count:Int!,total_price:Int!,userid:Int!,email:String!):String
+        deletePackageByPackageId(packageid:Int!):String
     }
     `
 );
