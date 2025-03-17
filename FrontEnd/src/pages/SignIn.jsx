@@ -27,7 +27,6 @@ const SignIn = () => {
         signIn(email: "${data.email}", password: "${data.password}"){
         id
         name
-        email
         }
       }
     `;
@@ -47,7 +46,6 @@ const SignIn = () => {
         navigator("/home");
       }
       const errmsg = response?.data?.errors[0]?.message;
-      console.log(errmsg);
 
       if (errmsg == "user not found") {
         toast.error("user not found");

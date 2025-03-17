@@ -17,6 +17,7 @@
   align-items: center;
   justify-content: center;
   overflow-y: auto; 
+  background: rgba(196, 240, 255, 0.756);
   box-sizing: border-box;
 }
 
@@ -75,13 +76,15 @@
   width: 85%;
   height: 96%;
   border-radius: 7px;
+  color: white;
+  font-weight: 600;
   padding-left: 13px;
   background-color: #7ac9e9;
 }
 
 .form-body > div > input::placeholder {
-  color: black;
-  font-weight: 700;
+  color: #fff;
+  font-weight: 500;
 }
 
 .signin-icon {
@@ -98,7 +101,16 @@
   background-color: #45abd2;
   text-align: center;
   font-size: 18px;
+  color: #fff;
   font-weight: 700;
   margin: auto;
   cursor: pointer;
+}
+@media (max-width:768px){
+  .signin-outer-con{
+    flex: none;
+  }
+  .signin-con1{
+    display: none;
+  }
 }

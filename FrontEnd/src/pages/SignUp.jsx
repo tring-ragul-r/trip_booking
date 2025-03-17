@@ -29,7 +29,7 @@ const SignUp = () => {
 
     const query = `
         mutation {
-      signUp(name: "${data.name}", email: "${data.email}", password: "${data.password}")
+      signUp(name: "${data.name}", email: "${data.email}", password: "${data.password}", phonenumber: "${data.phonenumber}")
     }
     `;
 
@@ -106,7 +106,7 @@ const SignUp = () => {
                     pattern: {
                       value:
                         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$/,
-                      message: "password format is wrong",
+                      message: "password should Contain 1 UpperCase 1 symbol 1 Number min 8 digit max 12 digit",
                     },
                   })} onChange={handlePassword}
                 />
@@ -119,6 +119,31 @@ const SignUp = () => {
               {errors.password && (
                 <p className="error">{errors.password.message}</p>
               )}
+            </div>
+            <div className="form-body">
+              <label>Phone Number</label>
+              <div className="input-con">
+                <input
+                  type="tel"
+                  placeholder="phonenumber"
+                  {...register("phonenumber", { required: "phone number required", maxLength: {
+                    value: 10,
+                    message: "Phone number should not exceed 10 digits",
+                  },
+                  minLength: {
+                    value: 10,
+                    message: "Phone number should be exactly 10 digits",
+                  }, pattern:{
+                    value:/^\d{10}$/,
+                    message:"phone number should contain number only"
+                  },
+                 })}
+                  />
+              </div>
+              <span className="signup-icon">
+                <FaUser />
+              </span>
+              {errors.phonenumber && <p className="error">{errors.phonenumber.message}</p>}
             </div>
             <p className="have-account">
               Already have an Account ?

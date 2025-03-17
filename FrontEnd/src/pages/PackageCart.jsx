@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./PackageCart.css";
+import { toast } from "react-toastify";
 import NoPackage from "../assets/notFound.png";
 
 const PackageCart = () => {
@@ -28,12 +29,28 @@ const PackageCart = () => {
     const response = await axios.post("http://localhost:3000/graphql", {
       query,
     });
-    setBookings(response.data.data.getBookingByUser);
+    if (response?.data?.data?.getBookingByUser) {
+      setBookings(response?.data.data.getBookingByUser);
+    }
   };
 
   useEffect(() => {
     fetchBooking();
   }, [bookings]);
+  const handleDeletePackage = async (booking) => {
+    const query = `
+        mutation{
+          deletePackageByPackageId(packageid: ${booking?.packageid})
+        }
+      `;
+    const response = await axios.post("http://localhost:3000/graphql", {
+      query,
+    });
+    if (response?.data?.data?.deletePackageByPackageId) {
+      setBookings((prevBookings) => prevBookings.filter((b) => b.packageid != booking.packageid))
+      toast.error("package deleted")
+    }
+  };
 
   if (bookings.length === 0) {
     return (
@@ -45,38 +62,47 @@ const PackageCart = () => {
   }
 
   return (
-    <div className="package-cart-container">
-      {bookings.map((booking) => (
-        <div className="booking-card">
-          <img
-            src={booking.package_img}
-            alt={booking.title}
-            className="booking-image"
-          />
-          <div className="booking-details">
-            <h1>{booking.title}</h1>
-            <p>
-              <b>Location:</b> {booking.location}
-            </p>
-            <p>
-              <b>Price per person:</b> ₹{booking.price}
-            </p>
-            <p>
-              <b>Duration:</b> {booking.days}
-            </p>
-            <p>
-              <b>Description:</b> {booking.description}
-            </p>
-            <p>
-              <b>Number of persons:</b> {booking.count}
-            </p>
-            <p>
-              <b>Date of Travel:</b> {booking.booking_date}
-            </p>
-            <h2>Total Price: ₹{booking.total_price}</h2>
+    <div className="package-cart-outer-container">
+      <h2 className="packagecart-header">My Bookings</h2>
+      <div className="package-cart-container">
+        {bookings.map((booking) => (
+          <div className="booking-card">
+            <img
+              src={booking.package_img}
+              alt={booking.title}
+              className="booking-image"
+            />
+            <div className="booking-details">
+              <h1>{booking.title}</h1>
+              <p>
+                <b>Location:</b> {booking.location}
+              </p>
+              <p>
+                <b>Price per person:</b> ₹{booking.price}
+              </p>
+              <p>
+                <b>Duration:</b> {booking.days}
+              </p>
+              <p>
+                <b>Description:</b> {booking.description}
+              </p>
+              <p>
+                <b>Number of persons:</b> {booking.count}
+              </p>
+              <p>
+                <b>Date of Travel:</b> {booking.booking_date}
+              </p>
+              <h2>Total Price: ₹{booking.total_price}</h2>
+              <button
+                className="delete-booking-package"
+                onClick={() => handleDeletePackage(booking)}
+              >
+                Delete Booking
+              </button>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };

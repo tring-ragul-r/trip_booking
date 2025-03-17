@@ -78,6 +78,7 @@ const fetchSlidePackages = async () => {
         packageid
         package_img
         title
+        description
         days
         price
         location
@@ -119,7 +120,7 @@ const fetchSlidePackages = async () => {
               key={data.packageid}
               
             >
-              <img src={data.package_img} alt="" className="home-slide-img"/>
+              <img src={data?.package_img} alt="" className="home-slide-img"/>
               <p className="home-slide-title">{data?.title}</p>
               <p className="home-slide-price">&#8377; {data?.price} onwards</p>
               <button className="home-slide-booknow-button" onClick={()=>handleBookNow(data)}>Book Now</button>
@@ -181,7 +182,9 @@ const fetchSlidePackages = async () => {
           ))}
         </div>
       </div>
+      <div id="home-faq-container">
       <Faqs/>
+      </div>
     </div>
   );
 };

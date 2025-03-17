@@ -1,14 +1,18 @@
 import React from "react";
-import "./BookingPackages.css";
-import { Booking } from "../pages/BookPackage";
+import "./BookingPackagePopup.css";
+import { Booking } from "../../pages/BookPackage";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const BookingPackages = ({setPopup,packageDetials}) => {
   const navigate = useNavigate();
   const handleBook = ()=>{
     Booking(packageDetials);
     setPopup(false);
-    navigate('/cart')
+    toast.success("Package booked successfully");
+
+    navigate('/home')
+    
   }
   const handleCancel=()=>{
       setPopup(false)

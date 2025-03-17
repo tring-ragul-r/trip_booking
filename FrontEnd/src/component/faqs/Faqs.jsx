@@ -3,7 +3,8 @@ import { FaPaperPlane } from "react-icons/fa";
 import { LiaUserEditSolid } from "react-icons/lia";
 import { MdFreeCancellation } from "react-icons/md";
 import { GrUpdate } from "react-icons/gr";
-
+import { RiRefund2Line } from "react-icons/ri";
+import { MdModeOfTravel } from "react-icons/md";
 import "./Faqs.css";
 const Faqs = () => {
   return (
@@ -15,24 +16,26 @@ const Faqs = () => {
       </div>
       <div className="faq-content-body">
         <div>
-          <FaPaperPlane className="faq-logo"/>
-          <h2>How to book trip with TripTrip?</h2>
+          <FaPaperPlane className="faq-logo" />
+          <h2 className="faq-content-title">
+            How to book trip with TringTrip?
+          </h2>
           <p>
-            To book a trip with TringTrip, simply explore the wide range of
-            packages available, including Best Packages, Visa-Free Destinations,
-            and International Trips. Once you find your desired package, click
-            on the "Book Now" button to proceed. You can customize your booking
-            by selecting the number of travelers and choosing your preferred
-            travel date using the calendar feature. After confirming the total
-            price, complete your booking with just a click! TringTrip ensures a
-            seamless experience, allowing you to plan your dream vacation
-            hassle-free. Start your journey today and make unforgettable
-            memories with TringTrip!
+            To book a trip with TringTrip, explore a wide range of packages,
+            including Best Packages, Visa-Free Destinations, and International
+            Trips. Once you find your desired package, click "Book Now" to
+            proceed. Customize your booking by selecting the number of travelers
+            and your preferred travel date using the calendar. Confirm the total
+            price and complete your booking with ease! TringTrip ensures a
+            seamless experience, helping you plan your dream vacation
+            hassle-free and create unforgettable memories.
           </p>
         </div>
         <div>
-          <LiaUserEditSolid className="faq-logo"/>
-          <h2>How can I edit my profile on TringTrip?</h2>
+          <LiaUserEditSolid className="faq-logo" />
+          <h2 className="faq-content-title">
+            How can I edit my profile on TringTrip?
+          </h2>
           <p>
             Editing your profile on TringTrip is simple and user-friendly. Click
             on your profile name in the header to open the profile menu. Select
@@ -46,7 +49,9 @@ const Faqs = () => {
         </div>
         <div>
           <MdFreeCancellation className="faq-logo" />
-          <h2>How to cancel trip with TringTring</h2>
+          <h2 className="faq-content-title">
+            How to cancel trip with TringTring
+          </h2>
           <p>
             To cancel a trip with TringTring, visit your PackageCart and locate
             the trip you wish to cancel. Click on the Cancel button, and a
@@ -60,7 +65,9 @@ const Faqs = () => {
 
         <div>
           <GrUpdate className="faq-logo" />
-          <h2>How can I update Trip with TringTring?</h2>
+          <h2 className="faq-content-title">
+            How can I update Trip with TringTring?
+          </h2>
           <p>
             To update your travel details, go to your PackageCart and find the
             trip you want to modify. Click on the Update button, and a form will
@@ -69,6 +76,32 @@ const Faqs = () => {
             your trip is scheduled within the next 7 days, updates will not be
             allowed. Make sure to review your travel plans early to avoid any
             inconvenience!
+          </p>
+        </div>
+        <div>
+          <RiRefund2Line className="faq-logo" />
+          <h2 className="faq-content-title">Instant Refunds with TringTrip</h2>
+          <p>
+            TringTrip offers an instant refund policy for eligible
+            cancellations, ensuring a hassle-free experience. If you cancel your
+            booking within the allowed time frame (at least 3 days before the
+            travel date), your refund will be processed immediately. Enjoy peace
+            of mind with TringTrip's commitment to providing quick and reliable
+            service for your travel needs.
+          </p>
+        </div>
+        <div>
+          <MdModeOfTravel className="faq-logo" />
+          <h2 className="faq-content-title">
+            Is there a guide available for trips?
+          </h2>
+          <p>
+            TringTrip offers professional guides for select travel packages to
+            make your journey more enriching. These guides provide expert
+            knowledge, local insights, and assistance during your trip, ensuring
+            you have a seamless and memorable experience. From historical
+            landmarks to cultural explorations, our guides enhance your travel
+            by helping you discover the best of each destination.
           </p>
         </div>
       </div>

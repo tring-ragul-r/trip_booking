@@ -8,22 +8,30 @@
     width: 230px;
 
 }
-.header-email-popup-container{
+
+.header-email-popup-container {
     display: flex;
     justify-content: center;
-    gap: 5px;
+    gap: 8px;
 }
-.user-logo-popup{
+
+.user-logo-popup {
     margin-top: 13px;
+    font-size: 19px;
+    margin-top: 18px;
+    cursor: pointer;
 }
-.header-popup-email{
-    font-size: 13px;
+
+.header-popup-profile {
+    font-size: 16px;
+    cursor: pointer;
 }
-.logout-button  {
+
+.logout-button {
     background-color: #f44336;
     color: #fff;
     width: 100%;
-    padding: 5px 0px;
+    padding: 8px 0px;
     font-size: 17px;
     border: 1px solid #f44336;
     cursor: pointer;

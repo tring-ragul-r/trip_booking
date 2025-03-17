@@ -77,18 +77,65 @@
 }
 
 
-@media (max-width: 600px) {
-  .app-header{
-    min-height: 200px;
-  }
-  .header-con,
-  .nav-menu {
-      flex-direction: column;
-      align-items: flex-start;
+@media (max-width: 768px) {
+  .app-header {
+    padding: 10px;
+    height: auto;
   }
 
-  .auth-btn-con{
-      flex-direction: column;
-      gap: 10px;
+  .header-con {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .tringtrip-logo {
+    width: 150px;
+    height: 30px;
+  }
+
+  .nav-menu {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+  }
+
+  .nav-btn {
+    font-size: 16px;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+  }
+
+  .user-name-container {
+    justify-content: center;
+    font-size: 16px;
+    gap: 10px;
+  }
+
+  .auth-btn-con {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .auth-btn {
+    font-size: 16px;
+    padding: 8px 20px;
+    width: 100%;
+    text-align: center;
+    border-radius: 5px;
+  }
+
+  .logout-btn {
+    padding: 8px 20px;
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
   }
 }

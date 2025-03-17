@@ -208,5 +208,21 @@ const root = {
       }
     } catch (err) {}
   },
+  updateProfileById : async ({email,phonenumber,id})=>{
+    try {
+      const result = await connection.query(
+        "UPDATE userdata SET email = $1, phonenumber = $2 WHERE id = $3",
+        [email, phonenumber, id]
+      );
+      if (result.rowCount > 0) {
+        return "Profile updated successfully";
+      } else {
+        return "Email already exist";
+      }
+    }catch(err){
+      console.error("Error updating profile:", err.message);
+    throw new Error("Failed to update profile.");
+    }
+  },
 };
 module.exports = root;

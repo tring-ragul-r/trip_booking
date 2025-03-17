@@ -22,18 +22,19 @@
 }
 .booking-popup-title{
     font-weight: 700;
-    font-size: 2rem;
+    font-size: 1.8rem;
     color: #1565c0;
+    margin-bottom: 50px;
 }
 .booking-popup-btns{
     width: 100%;
     display: flex;
     column-gap: 25px;
-    justify-content: center;
+    justify-content: center
 }
 .booking-popup-btns>button{
     height: 35px;
-    width: 90px;
+    width: 130px;
     border: transparent;
     border-radius: 25px;
     font-size: 18px;
@@ -46,4 +47,19 @@
 }
 .booking-popup-cancel-btn{
     background-color: rgb(238, 58, 58);
+}
+@media (max-width: 480px) {
+    .booking-popup-title {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+    }
+
+    .booking-popup-btns {
+        flex-direction: column;
+        row-gap: 10px;
+    }
+
+    .booking-popup-btns > button {
+        width: 100%;
+    }
 }

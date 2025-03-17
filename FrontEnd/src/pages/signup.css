@@ -18,6 +18,7 @@
   justify-content: center;
   overflow-y: auto; 
   box-sizing: border-box; 
+  background: rgba(196, 240, 255, 0.756);
 }
 
 .signup-con1 > img {
@@ -106,6 +107,7 @@
   border: none;
   border-radius: 7px;
   background-color: #45abd2;
+  color: #fff;
   text-align: center;
   font-size: 18px;
   font-weight: 700;
@@ -118,4 +120,13 @@
   font-size: 12px;
   margin-bottom: 0px;
   margin-top: 5px;
+}
+
+@media (max-width: 768px){
+  .signup-outer-con{
+    flex: none;
+  }
+  .signup-con1{
+    display: none;
+  }
 }

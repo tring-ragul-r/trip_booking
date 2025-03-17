@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { HiOutlineUserCircle } from "react-icons/hi";
 import "./Header.css";
-import HeaderUserPopup from "../../popUps/HeaderUserPopup";
+import HeaderUserPopup from "../popUps/HeaderUserPopup";
 import TringTripLogo from "../../assets/TringTrip_logo.png";
 
 const Header = () => {
@@ -17,6 +17,14 @@ const Header = () => {
     } else {
       navigate("/signin");
     }
+  };
+  const handleFaqs = () => {
+    navigate("/home");
+    setTimeout(() => {
+      document
+        .getElementById("home-faq-container")
+        ?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
   };
 
   return (
@@ -42,7 +50,10 @@ const Header = () => {
               All Packages
             </button>
             <button className="nav-btn" onClick={() => navigate("/cart")}>
-              My Booking
+              My Bookings
+            </button>
+            <button className="nav-btn" onClick={() => handleFaqs()}>
+              FAQs
             </button>
           </nav>
         )}

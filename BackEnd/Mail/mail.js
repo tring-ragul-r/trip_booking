@@ -19,6 +19,7 @@ const sendBookingEmail = async (email,booking_date,count,total_price) => {
         <p><b>Travel Date: </b>${booking_date}</p>
         <p><b>No. of person: </b>${count}</p>
         <p><b>Total Price: </b>${total_price}</p>
+        
         </div>
       </div>
     `,

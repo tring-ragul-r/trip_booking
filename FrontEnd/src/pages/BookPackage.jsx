@@ -1,41 +1,32 @@
-
-import { use, useState } from "react";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./bookPackage.css";
 import { toast } from "react-toastify";
-import BookingPackages from "../popUps/BookingPackages";
-export const Booking = async (packageDetials)=>{
-  console.log(packageDetials);
-  
-  
-  const booking_date = packageDetials?.booking_date
-  ? `${packageDetials?.booking_date.getDate()}-${  (packageDetials?.booking_date.getMonth() + 1)}-${ packageDetials?.booking_date.getFullYear()}`
-  : "";
+import BookingPackages from "../component/popUps/BookingPackagePopup";
 
-const userid = packageDetials?.userid;
-const packageid = packageDetials?.packageid;
-const email = packageDetials?.email;
-const query = `
-  mutation{
-insertBooking(packageid: ${packageid}, booking_date: "${booking_date}", count: ${packageDetials.count}, total_price: ${packageDetials.totalPrice}, userid: ${userid}, email: "${email}")
-}
+export const Booking = async (packageDetials) => {
+  const booking_date = packageDetials?.booking_date;
+  const userid = packageDetials?.userid;
+  const packageid = packageDetials?.packageid;
+  const email = packageDetials?.email;
+  const query = `
+  mutation {
+    insertBooking(packageid: ${packageid}, booking_date: "${booking_date}", count: ${packageDetials.count}, total_price: ${packageDetials.totalPrice}, userid: ${userid}, email: "${email}")
+  }
+  `;
 
-`;
-
-try {
-  const response = await axios.post("http://localhost:3000/graphql", {
-    query,
-  });
-   if(response.data.data){
-    toast.success("package Booked successfully")
-   }
-} catch (error) {
-  console.error("Error inserting booking:", error);
-}
-}
+  try {
+    const response = await axios.post("http://localhost:3000/graphql", {
+      query,
+    });
+    if (response.data.data) {
+     
+    }
+  } catch (error) {
+    console.error("Error inserting booking:", error);
+  }
+};
 
 function BookPackage() {
   const location = useLocation();
@@ -43,22 +34,26 @@ function BookPackage() {
   const packageData = location.state?.package;
   const [count, setCount] = useState(1);
   const [totalPrice, setTotalPrice] = useState(packageData?.price);
-  const [showCalendar, setShowCalendar] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [popup,setPopup] = useState(false);
-  const userData = JSON.parse(localStorage.getItem("userData"))
-  let bookingDetails = {
-    userid:userData?.id,
+  const [selectedDate, setSelectedDate] = useState("");
+  const [popup, setPopup] = useState(false);
+  const userData = JSON.parse(localStorage.getItem("userData"));
+
+  const bookingDetails = {
+    userid: userData?.id,
     totalPrice,
-    booking_date:selectedDate,
+    booking_date: selectedDate,
     count,
-    email:userData?.email,
-    packageid:packageData?.packageid
-  }
+    email: userData?.email,
+    packageid: packageData?.packageid,
+  };
 
   const today = new Date();
-  const tillDate = new Date();
-  tillDate.setMonth(today.getMonth() + 2);
+  today.setDate(today.getDate() + 4);
+  const minDate = today.toISOString().split("T")[0];
+
+  const maxDate = new Date();
+  maxDate.setMonth(maxDate.getMonth() + 2);
+  const maxDateString = maxDate.toISOString().split("T")[0];
 
   const handleAddBtn = () => {
     if (count < 6) {
@@ -76,31 +71,16 @@ function BookPackage() {
     }
   };
 
-  const handleShowCalendar = () => {
-    setShowCalendar(!showCalendar);
+  const handleDateChange = (e) => {
+    setSelectedDate(e.target.value);
   };
 
-  const handleDateSelect = (date) => {
-    setSelectedDate(date);
-    setShowCalendar(false);
-  };
-
-  const handleBookNow =  () => {
-
-    if(!selectedDate){
-      toast.error("select the Date to book")
+  const handleBookNow = () => {
+    if (!selectedDate) {
+      toast.error("Select a date to book");
       return;
     }
-
-    bookingDetails = {
-      booking_date:selectedDate,
-      totalPrice,
-      count:count
-    }
-
-
-    setPopup(true)
-    
+    setPopup(true);
   };
 
   return (
@@ -126,31 +106,32 @@ function BookPackage() {
             &#128338; Duration: {packageData?.days}
           </p>
           {selectedDate && (
-              <p className="selected-date">
-               &#128198; Selected Date: {selectedDate.getDate()}/{selectedDate.getMonth() + 1}/{selectedDate.getFullYear()}
-              </p>
-            )}
+            <p className="selected-date">
+              &#128198; Selected Date: {selectedDate}
+            </p>
+          )}
           <p className="package-description">{packageData?.description}</p>
-          
-          <div className="add-person-con">
+          <div className="package-add-person-container">
+            <p className="package-add-person-title">Add person</p>
+          <div className="add-person-button-container">
             <button onClick={handleDropBtn}>-</button>
             <p>{count}</p>
             <button onClick={handleAddBtn}>+</button>
           </div>
-          <div className="calendar-toggle-container">
-            <button className="toggle-calendar-btn" onClick={handleShowCalendar}>
-              {showCalendar ? "Hide Calendar" : "Book Your Date"}
-            </button>
-            {showCalendar && (
-              <div className="calendar-container">
-                <Calendar
-                  minDate={today}
-                  maxDate={tillDate}
-                  onClickDay={handleDateSelect}
-                />
-              </div>
-            )}
-            
+          </div>
+          <div className="date-picker-container">
+            <label htmlFor="date-picker" className="date-label">
+              Select Booking Date:
+            </label>
+            <input
+              id="date-picker"
+              type="date"
+              min={minDate}
+              max={maxDateString}
+              value={selectedDate}
+              onChange={handleDateChange}
+              className="date-input"
+            />
           </div>
           <h2 className="total-price">Total Price: ₹{totalPrice}</h2>
           <button className="book-btn" onClick={handleBookNow}>
@@ -158,8 +139,9 @@ function BookPackage() {
           </button>
         </div>
       </div>
-      {popup && <BookingPackages setPopup={setPopup} packageDetials = {bookingDetails} />}
-      
+      {popup && (
+        <BookingPackages setPopup={setPopup} packageDetials={bookingDetails} />
+      )}
     </div>
   );
 }

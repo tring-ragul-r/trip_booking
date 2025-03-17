@@ -65,11 +65,9 @@ body {
 }
 
 .package-header {
-  font-size: 32px;
-  font-weight: bold;
-  color: #007bff;
   text-align: center;
-  margin-bottom: 10px;
+  color: #45abd2;
+  text-shadow: 1px 1px 2px #000000;
 }
 
 hr {
@@ -80,9 +78,8 @@ hr {
 }
 
 .package-card-body {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
   gap: 20px;
   overflow-y: auto;
   max-height: 70vh;

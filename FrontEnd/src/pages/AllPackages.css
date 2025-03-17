@@ -9,9 +9,9 @@
     background: rgba(245, 245, 245, 0.3);
 }
 .all-packages-title{
-    font-size: 35px;
-    color: #007bff;
-    text-align: center; 
+    text-align: center;
+  color: #45abd2;
+  text-shadow: 1px 1px 2px #000000; 
     
     
 }
@@ -29,4 +29,15 @@
     scrollbar-width: none;
     justify-content: space-evenly;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+@media (max-width: 768px) {
+    .all-packages-container {
+        width: 90%;
+        padding: 15px;
+        gap: 20px;
+    }
+
+    .all-packages-title {
+        font-size: 1.5rem;
+    }
 }

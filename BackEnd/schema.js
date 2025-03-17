@@ -44,6 +44,7 @@ const schema = buildSchema(
     type Mutation{
         signUp(name:String!,email:String!,password:String!,phonenumber:String!):String
         insertBooking(packageid:Int!,booking_date:String!,count:Int!,total_price:Int!,userid:Int!,email:String!):String
+        updateProfileById(email: String!, phonenumber: String!, id: Int!): String
         deletePackageByPackageId(packageid:Int!):String
     }
     `
